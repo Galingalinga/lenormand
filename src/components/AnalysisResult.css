@@ -1,27 +1,28 @@
 .analysis-container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem 1rem 2rem;
 }
 
 .analysis-title {
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     color: var(--text-primary);
 }
 
 .analysis-content {
-    background: var(--card-bg);
+    background: rgba(250, 248, 245, 0.88);
     border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     line-height: 1.8;
+    backdrop-filter: blur(2px);
 }
 
 .analysis-heading {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--primary-color);
     margin-top: 1.5rem;
@@ -35,12 +36,14 @@
 .analysis-paragraph {
     margin-bottom: 1rem;
     color: var(--text-primary);
+    font-size: 0.95rem;
 }
 
 .analysis-list-item {
     margin-bottom: 0.5rem;
     padding-left: 1rem;
     color: var(--text-primary);
+    font-size: 0.95rem;
 }
 
 /* Loading 狀態 */
@@ -49,15 +52,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 3rem;
+    padding: 3rem 1rem;
     gap: 1rem;
 }
 
 .spinner {
     width: 50px;
     height: 50px;
-    border: 4px solid var(--border-color);
-    border-top-color: var(--primary-color);
+    border: 4px solid rgba(107, 155, 209, 0.2);
+    border-top-color: rgba(107, 155, 209, 0.8);
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -69,7 +72,7 @@
 }
 
 .loading-state p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--text-secondary);
 }
 
@@ -79,14 +82,15 @@
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    padding: 3rem;
-    background: var(--card-bg);
+    padding: 2rem 1rem;
+    background: rgba(250, 248, 245, 0.88);
     border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(2px);
 }
 
 .error-message {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #e53e3e;
     text-align: center;
 }
@@ -95,7 +99,7 @@
     padding: 0.75rem 2rem;
     font-size: 1rem;
     font-weight: 500;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--primary-color);
     color: white;
     border: none;
     border-radius: 8px;
@@ -105,23 +109,83 @@
 
 .retry-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 15px rgba(232, 154, 60, 0.4);
+    background: #d68a2f;
 }
 
+/* 手機版優先 - 平板 */
 @media (max-width: 768px) {
     .analysis-container {
-        padding: 1rem;
+        padding: 0.75rem 0.75rem 1.5rem;
     }
 
     .analysis-title {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+        margin-bottom: 1.25rem;
     }
 
     .analysis-content {
-        padding: 1.5rem;
+        padding: 1.25rem;
     }
 
     .analysis-heading {
         font-size: 1.1rem;
+    }
+
+    .analysis-paragraph,
+    .analysis-list-item {
+        font-size: 0.9rem;
+    }
+
+    .loading-state {
+        padding: 2rem 0.75rem;
+    }
+
+    .error-state {
+        padding: 1.5rem 0.75rem;
+    }
+}
+
+/* 手機版優先 - 小螢幕 */
+@media (max-width: 480px) {
+    .analysis-container {
+        padding: 0.5rem 0.5rem 1rem;
+    }
+
+    .analysis-title {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .analysis-content {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+
+    .analysis-heading {
+        font-size: 1rem;
+        margin-top: 1.25rem;
+    }
+
+    .analysis-paragraph,
+    .analysis-list-item {
+        font-size: 0.85rem;
+        line-height: 1.7;
+    }
+
+    .spinner {
+        width: 40px;
+        height: 40px;
+        border-width: 3px;
+    }
+
+    .loading-state p,
+    .error-message {
+        font-size: 0.9rem;
+    }
+
+    .retry-button {
+        padding: 0.65rem 1.5rem;
+        font-size: 0.9rem;
     }
 }

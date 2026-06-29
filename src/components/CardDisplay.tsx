@@ -31,17 +31,18 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({ cards }) => {
                         <div className="card-inner">
                             {/* 牌背 */}
                             <div className="card-face card-back-face">
-                                <img src="/statics/back.png" alt="牌背" />
+                                <img src="statics/back.png" alt="牌背" />
                             </div>
                             {/* 牌面 */}
                             <div className="card-face card-front-face">
                                 <img src={card.imagePath} alt={card.zhName} />
-                                <div className="card-info">
-                                    <p className="card-name-zh">{card.zhName}</p>
-                                    <p className="card-name-en">{card.enName}</p>
-                                    <p className="card-position">第{index + 1}張</p>
-                                </div>
                             </div>
+                        </div>
+                        {/* 卡牌資訊顯示在卡片下方 */}
+                        <div className="card-info">
+                            <p className="card-name-zh">{card.zhName}</p>
+                            <p className="card-name-en">{card.enName}</p>
+                            <p className="card-position">第{index + 1}張</p>
                         </div>
                     </div>
                 ))}

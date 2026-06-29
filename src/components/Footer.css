@@ -1,0 +1,98 @@
+.footer {
+    padding: 2rem 1rem 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.instagram-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+}
+
+.instagram-link:hover {
+    color: #E4405F;
+    background: rgba(228, 64, 95, 0.08);
+}
+
+.instagram-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+
+.instagram-link:hover .instagram-icon {
+    transform: scale(1.1);
+}
+
+.disclaimer {
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    line-height: 1.6;
+    max-width: 600px;
+    width: 100%;
+    margin: 0;
+    padding: 0 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+}
+
+/* 手機版調整 */
+@media (max-width: 768px) {
+    .footer {
+        padding: 1.5rem 1rem 1.25rem;
+        gap: 0.5rem;
+    }
+
+    .instagram-link {
+        font-size: 0.7rem;
+    }
+
+    .instagram-icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    .disclaimer {
+        font-size: 0.65rem;
+        line-height: 1.5;
+        max-width: 100%;
+        padding: 0 0.75rem;
+    }
+
+    .mobile-break {
+        display: none;
+    }
+}
+
+/* 超小螢幕 */
+@media (max-width: 480px) {
+    .footer {
+        padding: 1.25rem 0.75rem 1rem;
+    }
+
+    .disclaimer {
+        font-size: 0.6rem;
+        line-height: 1.4;
+        padding: 0 0.5rem;
+    }
+}
+
+/* iPhone 特定尺寸優化 */
+@media (max-width: 390px) {
+    .disclaimer {
+        font-size: 0.58rem;
+        padding: 0 0.4rem;
+    }
+}

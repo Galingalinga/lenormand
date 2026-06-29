@@ -5,117 +5,320 @@
     justify-content: center;
     min-height: 100vh;
     padding: 2rem;
+    gap: 2rem;
 }
 
+/* 牌疊容器 */
 .card-deck {
     position: relative;
     width: 200px;
     height: 300px;
-    margin-bottom: 2rem;
+    perspective: 1000px;
 }
 
+/* 牌背層 */
 .card-back {
     position: absolute;
     width: 100%;
     height: 100%;
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
 }
 
-.shuffling .card-back {
-    animation: shuffle 2.5s ease-in-out;
+.card-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
-@keyframes shuffle {
+/* 疊牌效果 - 每層稍微錯位 */
+.card-layer-1 {
+    z-index: 5;
+    transform: translate(0, 0) rotate(0deg);
+}
+
+.card-layer-2 {
+    z-index: 4;
+    transform: translate(-3px, -3px) rotate(-1deg);
+}
+
+.card-layer-3 {
+    z-index: 3;
+    transform: translate(3px, -6px) rotate(1deg);
+}
+
+.card-layer-4 {
+    z-index: 2;
+    transform: translate(-6px, -9px) rotate(-2deg);
+}
+
+.card-layer-5 {
+    z-index: 1;
+    transform: translate(6px, -12px) rotate(2deg);
+}
+
+/* 洗牌動畫 */
+.card-deck.shuffling .card-layer-1 {
+    animation: shuffle1 1.5s ease-in-out infinite;
+}
+
+.card-deck.shuffling .card-layer-2 {
+    animation: shuffle2 1.5s ease-in-out infinite;
+}
+
+.card-deck.shuffling .card-layer-3 {
+    animation: shuffle3 1.5s ease-in-out infinite;
+}
+
+.card-deck.shuffling .card-layer-4 {
+    animation: shuffle4 1.5s ease-in-out infinite;
+}
+
+.card-deck.shuffling .card-layer-5 {
+    animation: shuffle5 1.5s ease-in-out infinite;
+}
+
+@keyframes shuffle1 {
 
     0%,
     100% {
-        transform: translateY(0) translateX(0) rotate(0deg);
+        transform: translate(0, 0) rotate(0deg);
     }
 
     25% {
-        transform: translateY(-30px) translateX(-20px) rotate(-15deg);
+        transform: translate(-8px, -5px) rotate(-3deg);
     }
 
     50% {
-        transform: translateY(-50px) translateX(20px) rotate(15deg);
+        transform: translate(8px, -5px) rotate(3deg);
     }
 
     75% {
-        transform: translateY(-30px) translateX(-10px) rotate(-8deg);
+        transform: translate(-5px, -8px) rotate(-2deg);
     }
 }
 
-.shuffle-text {
-    font-size: 1.5rem;
-    color: var(--text-secondary);
-    font-weight: 300;
-    animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
+@keyframes shuffle2 {
 
     0%,
     100% {
-        opacity: 1;
+        transform: translate(-3px, -3px) rotate(-1deg);
+    }
+
+    25% {
+        transform: translate(5px, -8px) rotate(2deg);
     }
 
     50% {
-        opacity: 0.5;
+        transform: translate(-10px, -8px) rotate(-4deg);
+    }
+
+    75% {
+        transform: translate(3px, -5px) rotate(1deg);
     }
 }
 
-.draw-button {
-    padding: 1rem 3rem;
-    font-size: 1.2rem;
-    font-weight: 500;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
+@keyframes shuffle3 {
+
+    0%,
+    100% {
+        transform: translate(3px, -6px) rotate(1deg);
+    }
+
+    25% {
+        transform: translate(-6px, -10px) rotate(-3deg);
+    }
+
+    50% {
+        transform: translate(10px, -10px) rotate(4deg);
+    }
+
+    75% {
+        transform: translate(-3px, -8px) rotate(-1deg);
+    }
+}
+
+@keyframes shuffle4 {
+
+    0%,
+    100% {
+        transform: translate(-6px, -9px) rotate(-2deg);
+    }
+
+    25% {
+        transform: translate(8px, -12px) rotate(3deg);
+    }
+
+    50% {
+        transform: translate(-12px, -12px) rotate(-5deg);
+    }
+
+    75% {
+        transform: translate(5px, -10px) rotate(2deg);
+    }
+}
+
+@keyframes shuffle5 {
+
+    0%,
+    100% {
+        transform: translate(6px, -12px) rotate(2deg);
+    }
+
+    25% {
+        transform: translate(-10px, -15px) rotate(-4deg);
+    }
+
+    50% {
+        transform: translate(12px, -15px) rotate(5deg);
+    }
+
+    75% {
+        transform: translate(-6px, -13px) rotate(-2deg);
+    }
+}
+
+/* 抽牌動畫 - 其他牌消失，兩張牌飛出 */
+.card-deck.drawing .card-layer-1,
+.card-deck.drawing .card-layer-2,
+.card-deck.drawing .card-layer-3,
+.card-deck.drawing .card-layer-4,
+.card-deck.drawing .card-layer-5 {
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+/* 抽出的兩張牌 */
+.drawn-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 10;
 }
 
-.draw-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+.drawn-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
-.draw-button:active {
-    transform: translateY(0);
+.drawn-card-1 {
+    animation: drawCard1 1s ease-out forwards;
 }
 
-.fade-in {
+.drawn-card-2 {
+    animation: drawCard2 1s ease-out forwards;
+}
+
+@keyframes drawCard1 {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-120px, -50px) rotate(-15deg) scale(1.1);
+        opacity: 1;
+    }
+}
+
+@keyframes drawCard2 {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(120px, -50px) rotate(15deg) scale(1.1);
+        opacity: 1;
+    }
+}
+
+/* 狀態文字 */
+.shuffle-status {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    text-align: center;
+    margin: 0;
+    min-height: 1.5rem;
     animation: fadeIn 0.5s ease-in;
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
+/* 手機版調整 */
 @media (max-width: 768px) {
     .card-deck {
-        width: 150px;
-        height: 225px;
+        width: 160px;
+        height: 240px;
     }
 
-    .shuffle-text {
-        font-size: 1.2rem;
+    .shuffle-status {
+        font-size: 0.9rem;
     }
 
-    .draw-button {
-        padding: 0.875rem 2.5rem;
-        font-size: 1.1rem;
+    @keyframes drawCard1 {
+        0% {
+            transform: translate(0, 0) rotate(0deg) scale(1);
+        }
+
+        100% {
+            transform: translate(-90px, -40px) rotate(-15deg) scale(1.05);
+        }
+    }
+
+    @keyframes drawCard2 {
+        0% {
+            transform: translate(0, 0) rotate(0deg) scale(1);
+        }
+
+        100% {
+            transform: translate(90px, -40px) rotate(15deg) scale(1.05);
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .card-deck {
+        width: 140px;
+        height: 210px;
+    }
+
+    .shuffle-status {
+        font-size: 0.85rem;
+    }
+
+    @keyframes drawCard1 {
+        100% {
+            transform: translate(-70px, -30px) rotate(-12deg) scale(1);
+        }
+    }
+
+    @keyframes drawCard2 {
+        100% {
+            transform: translate(70px, -30px) rotate(12deg) scale(1);
+        }
     }
 }

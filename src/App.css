@@ -1,13 +1,14 @@
 :root {
     /* 顏色系統 */
-    --primary-color: #667eea;
-    --primary-color-alpha: rgba(102, 126, 234, 0.15);
-    --text-primary: #2d3748;
-    --text-secondary: #4a5568;
-    --text-tertiary: #a0aec0;
-    --border-color: #e2e8f0;
+    --primary-color: #e89a3c;
+    --primary-color-alpha: rgba(232, 154, 60, 0.15);
+    --text-primary: #545454;
+    --text-secondary: #6b6b6b;
+    --text-tertiary: #8a8a8a;
+    --border-color: #d4d4d4;
     --card-bg: #ffffff;
-    --bg-color: #f7fafc;
+    --bg-color: #a0cdea;
+    --nav-bg: #f5f1e8;
 
     /* 字體 */
     font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -24,7 +25,6 @@
 }
 
 body {
-    background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
     color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;

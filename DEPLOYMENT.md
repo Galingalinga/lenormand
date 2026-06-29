@@ -1,59 +1,82 @@
 # AI 雷諾曼抽卡系統 - 部署指南
 
-本專案已升級為「安全後端連線架構」，並使用 Vercel Serverless Function 隱密保護您的 Gemini API 金鑰。請按照以下步驟進行部署：
+## 部署到 GitHub Pages
 
-## 部署到 Vercel (推薦，支援安全後端)
+### 步驟 1：設定 GitHub Secrets（重要！）
 
-### 步驟 1：在 Vercel 設定環境變數（重要！）
+為了保護您的 API 金鑰，需要在 GitHub 設定 Secrets：
 
-為了保護您的 API 金鑰不被瀏覽器暴露，請在 Vercel 儀表板設定以下環境變數（無須加上 `VITE_` 前綴）：
+1. 前往您的 GitHub Repository：https://github.com/Galingalinga/lenormand
+2. 點擊 **Settings** → **Secrets and variables** → **Actions**
+3. 點擊 **New repository secret** 並新增以下兩個 secrets：
 
-1. 前往您的 Vercel 儀表板，選擇您的專案。
-2. 進入 **Settings** → **Environment Variables**。
-3. 新增以下兩個環境變數，並請將類型設為 **`Sensitive`**（加密儲存）：
+   **Secret 1：主金鑰**
+   - Name: `VITE_GEMINI_API_KEY`
+   - Value: 您的主 Gemini API 金鑰
 
-   - **金鑰 1：主金鑰**
-     - Key: `GEMINI_API_KEY`
-     - Value: 您的主 Gemini API 金鑰
-   - **金鑰 2：備用金鑰（可選）**
-     - Key: `GEMINI_API_KEY_BACKUP`
-     - Value: 您的備用 Gemini API 金鑰
+   **Secret 2：備用金鑰**
+   - Name: `VITE_GEMINI_API_KEY_BACKUP`
+   - Value: 您的備用 Gemini API 金鑰
 
----
+### 步驟 2：啟用 GitHub Pages
 
-### 步驟 2：推送程式碼
+1. 在 Repository 設定中，找到 **Pages** 選項
+2. 在 **Source** 下拉選單中選擇 **GitHub Actions**
 
-在本地執行以下指令推送更新：
+### 步驟 3：推送程式碼
+
+在本地執行以下指令：
 
 ```bash
-# 加入所有變更
+# 初始化 git（如果還沒有）
+git init
+
+# 加入遠端 repository
+git remote add origin https://github.com/Galingalinga/lenormand.git
+
+# 加入所有檔案（.env 會被 .gitignore 排除，不會上傳）
 git add .
 
 # 提交
-git commit -m "feat: migrate Gemini calling to secure Vercel Serverless Function"
+git commit -m "Initial commit: AI Lenormand Card Reading System"
 
 # 推送到 GitHub
-git push origin main
+git push -u origin main
 ```
 
----
+### 步驟 4：等待部署完成
 
-### 步驟 3：等待部署完成
-
-1. 推送後，Vercel 會自動開始拉取最新代碼並進行建置。
-2. 建置完成後，您的網站將以根目錄路徑 `/` 完美運作，且 API 金鑰已被完全安全鎖定在後端伺服器中。
-
----
-
-## 關於舊版 GitHub Pages 說明
-
-⚠️ **注意**：由於 GitHub Pages 僅支援靜態網頁託管，不支援運作本專案所使用的伺服器端後端程式碼（`api/analyze.js`）。因此，**請改用 Vercel 作為本專案的生產環境部署平台**。
+1. 推送後，GitHub Actions 會自動開始建置和部署
+2. 前往 **Actions** 頁面查看部署進度
+3. 部署完成後，您的網站會在以下網址上線：
+   **https://galingalinga.github.io/lenormand/**
 
 ## 安全性確認
 
-✅ **API 金鑰已完全隱密**
-- 金鑰存放在 Vercel 伺服器端，使用者使用瀏覽器 F12 工具絕對無法查看。
-- 本地開發時，環境變數請定義在 `.env` 中，且 `.env` 檔案已被 `.gitignore` 排除，不會被推送到 GitHub。
+✅ **API 金鑰已受保護**
+- `.env` 檔案已在 `.gitignore` 中，不會被上傳
+- API 金鑰儲存在 GitHub Secrets 中，完全加密
+- 建置時才會注入金鑰，不會出現在程式碼中
 
-✅ **多模型備援機制**
-- 後端已內建備援機制。當 `gemini-3.1-flash-lite` 忙碌（503 錯誤）時，系統會自動切換至 `gemini-2.5-flash-lite` 或 `gemini-2.5-flash`，以確保解析極高機率成功。
+✅ **自動部署**
+- 每次推送到 `main` 分支都會自動重新部署
+- 也可以在 Actions 頁面手動觸發部署
+
+## 更新網站
+
+未來要更新網站時，只需：
+
+```bash
+git add .
+git commit -m "描述您的更新"
+git push
+```
+
+GitHub Actions 會自動重新建置和部署！
+
+## 疑難排解
+
+如果部署失敗，請檢查：
+1. GitHub Secrets 是否正確設定
+2. Repository 的 Pages 設定是否選擇 "GitHub Actions"
+3. 在 Actions 頁面查看錯誤日誌

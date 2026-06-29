@@ -1,0 +1,62 @@
+.result-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navigation Bar */
+.result-navbar {
+    background: var(--nav-bg);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.result-nav-title {
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: var(--text-primary);
+    margin: 0;
+    text-transform: uppercase;
+}
+
+/* Main Content */
+.result-content {
+    flex: 1;
+    padding: 2rem 1rem;
+}
+
+/* 手機版調整 */
+@media (max-width: 768px) {
+    .result-navbar {
+        padding: 1rem 1rem;
+    }
+
+    .result-nav-title {
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+    }
+
+    .result-content {
+        padding: 1.5rem 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .result-navbar {
+        padding: 0.875rem 0.75rem;
+    }
+
+    .result-nav-title {
+        font-size: 0.65rem;
+        letter-spacing: 0.5px;
+    }
+
+    .result-content {
+        padding: 1.25rem 0.5rem;
+    }
+}

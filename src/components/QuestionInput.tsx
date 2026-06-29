@@ -7,35 +7,67 @@ interface QuestionInputProps {
 
 export const QuestionInput: React.FC<QuestionInputProps> = ({ onStart }) => {
     const [question, setQuestion] = useState('');
+    const maxLength = 60;
+    const warningThreshold = 50; // 超過 50 字時顯示提示
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (question.trim()) {
-            onStart(question.trim());
+    const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        if (value.length <= maxLength) {
+            setQuestion(value);
         }
     };
 
-    return (
-        <div className="question-input-container">
-            <h1 className="title">AI 雷諾曼抽卡</h1>
-            <p className="subtitle">讓卡牌為你指引方向</p>
+    const handleStart = () => {
+        // 使用使用者輸入的問題，若無則使用預設問題
+        const finalQuestion = question.trim() || '請為我指引方向';
+        onStart(finalQuestion);
+    };
 
-            <form onSubmit={handleSubmit} className="question-form">
-                <textarea
-                    className="question-textarea"
-                    placeholder="請輸入你的問題...&#10;例如：我的事業發展如何？&#10;例如：這段感情會有結果嗎？"
-                    value={question}
-                    onChange={(e) => setQuestion(e.target.value)}
-                    rows={4}
-                />
-                <button
-                    type="submit"
-                    className="start-button"
-                    disabled={!question.trim()}
-                >
-                    開始洗牌
+    const showWarning = question.length >= warningThreshold;
+
+    return (
+        <div className="question-page">
+            {/* Navigation Bar */}
+            <nav className="navbar">
+                <h1 className="nav-title">EMBROIDERED-STYLE LENORMAND CARDS</h1>
+            </nav>
+
+            {/* Main Content */}
+            <div className="main-content">
+                <p className="intro-text fade-in">
+                    36張刺繡風格雷諾曼牌卡 X AI牌義解析<br />
+                    以一針一線的縝密思緒，縫製出專屬於你的指引。
+                </p>
+
+                {/* Question Input */}
+                <div className="question-input-wrapper">
+                    <input
+                        type="text"
+                        className="question-input"
+                        placeholder="此刻，你想釐清的是什麼？"
+                        value={question}
+                        onChange={handleQuestionChange}
+                        maxLength={maxLength}
+                    />
+                    {showWarning && (
+                        <p className="input-hint">試著將問題精簡一些，會更容易聚焦喔</p>
+                    )}
+                </div>
+
+                <button className="start-button" onClick={handleStart}>
+                    免費線上抽牌
                 </button>
-            </form>
+
+                {/* Sample Cards Display */}
+                <div className="sample-cards">
+                    <div className="sample-card">
+                        <img src="statics/9_Bouquet.png" alt="Bouquet" />
+                    </div>
+                    <div className="sample-card">
+                        <img src="statics/17_Stork.png" alt="Stork" />
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
