@@ -21,7 +21,7 @@ export const Footer: React.FC = () => {
             </a>
 
             <p className="disclaimer">
-                AI解析使用模型為Gemini&nbsp;2.5&nbsp;Flash&nbsp;Lite，<br />
+                AI解析使用模型為Gemini，<br />
                 抽到的牌與文字解讀，<br />
                 是一段邀請你與自己對話的過程。<br />
                 請將內容視為靈感參考，<br />

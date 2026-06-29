@@ -31,7 +31,7 @@ export const CardDisplay: React.FC<CardDisplayProps> = ({ cards }) => {
                         <div className="card-inner">
                             {/* 牌背 */}
                             <div className="card-face card-back-face">
-                                <img src="statics/back.png" alt="牌背" />
+                                <img src="/statics/back.png" alt="牌背" />
                             </div>
                             {/* 牌面 */}
                             <div className="card-face card-front-face">

@@ -34,19 +34,19 @@ export const ShuffleAnimation: React.FC<ShuffleAnimationProps> = ({ onComplete }
             <div className={`card-deck ${phase === 'shuffling' ? 'shuffling' : ''}`}>
                 {/* 多層牌背製造疊牌效果 */}
                 <div className="card-back card-layer-1">
-                    <img src="statics/back.png" alt="Card Back" />
+                    <img src="/statics/back.png" alt="Card Back" />
                 </div>
                 <div className="card-back card-layer-2">
-                    <img src="statics/back.png" alt="Card Back" />
+                    <img src="/statics/back.png" alt="Card Back" />
                 </div>
                 <div className="card-back card-layer-3">
-                    <img src="statics/back.png" alt="Card Back" />
+                    <img src="/statics/back.png" alt="Card Back" />
                 </div>
                 <div className="card-back card-layer-4">
-                    <img src="statics/back.png" alt="Card Back" />
+                    <img src="/statics/back.png" alt="Card Back" />
                 </div>
                 <div className="card-back card-layer-5">
-                    <img src="statics/back.png" alt="Card Back" />
+                    <img src="/statics/back.png" alt="Card Back" />
                 </div>
             </div>
 

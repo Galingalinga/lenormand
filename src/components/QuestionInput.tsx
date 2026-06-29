@@ -61,10 +61,10 @@ export const QuestionInput: React.FC<QuestionInputProps> = ({ onStart }) => {
                 {/* Sample Cards Display */}
                 <div className="sample-cards">
                     <div className="sample-card">
-                        <img src="statics/9_Bouquet.png" alt="Bouquet" />
+                        <img src="/statics/9_Bouquet.png" alt="Bouquet" />
                     </div>
                     <div className="sample-card">
-                        <img src="statics/17_Stork.png" alt="Stork" />
+                        <img src="/statics/17_Stork.png" alt="Stork" />
                     </div>
                 </div>
             </div>
